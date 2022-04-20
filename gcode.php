@@ -110,16 +110,21 @@ $travelRate = $_POST['travelRate'];//$travelRate = 3000;
 $overScan = $_POST['overScan'];//$overScan = 3;
 
 $offsetY=$_POST['offsetY'];//$offsetY=10;
+$homeY=$_POST['homeY'];//$homeY=10;
 $sizeY=$_POST['sizeY'];//$sizeY=40;
 $scanGap=$_POST['scanGap'];//$scanGap=.1;
 
 $offsetX=$_POST['offsetX'];//$offsetX=5;
+$homeX=$_POST['homeX'];//$homeX=10;
 $sizeX=$sizeY*$w/$h; //SET A HEIGHT AND CALC WIDTH (this should be customizable)
 $resX=$_POST['resX'];;//$resX=.1;
 
 //Create a resampled image with exactly the data needed, 1px in to 1px out
 $pixelsX = round($sizeX/$resX);
 $pixelsY = round($sizeY/$scanGap);
+
+$startX = $homeX - $offsetX;
+$startY = $homeY - $offsetY;
 
 $tmp = imagecreatetruecolor($pixelsX, $pixelsY);
 imagecopyresampled($tmp, $src, 0, 0, 0, 0, $pixelsX, $pixelsY, $w, $h);
@@ -170,7 +175,7 @@ print("M106 S$laserOff; Turn laser off\n");
 $prevValue = $laserOff; //Clear out the 'previous value' comparison
 print("G1 F$feedRate\n");
 
-print("G0 X$offsetX Y$offsetY F$travelRate\n"); //travel to start coordinates (upper right of image)
+print("G0 X$startX Y$startY F$travelRate\n"); //travel to start coordinates (upper right of image)
 
 //loop through the lines
 $lineIndex=0;
@@ -236,6 +241,6 @@ for($line=$offsetY; $line<($sizeY+$offsetY) && $lineIndex < $pixelsY; $line+=$sc
 $lineIndex--; //Undo one for debugging porpoises
 
 print("M106 S$laserOff ;Turn laser off\n");
-print("G0 X$offsetX Y$offsetY F$travelRate ;Go home to start position\n");
+print("G0 X$startX Y$startY F$travelRate ;Go home to start position\n");
 imagedestroy($tmp);
 ?>
