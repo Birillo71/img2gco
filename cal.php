@@ -108,15 +108,20 @@ $travelRate = $_POST['travelRate'];//$travelRate = 3000;
 $overScan = $_POST['overScan'];//$overScan = 3;
 
 $offsetY=$_POST['offsetY'];//$offsetY=10;
+$homeY=$_POST['homeY'];//$homeY=10;
 $sizeY=$_POST['sizeY'];//$sizeY=40;
 $scanGap=$_POST['scanGap'];//$scanGap=.1;
 
 $offsetX=$_POST['offsetX'];//$offsetX=5;
+$homeX=$_POST['homeX'];//$homeX=10;
 $sizeX=$sizeY*$w/$h; //SET A HEIGHT AND CALC WIDTH (this should be customizable)
 $resX=$_POST['resX'];;//$resX=.1;
 
 $pixelsX = round($sizeX/$resX);
 $pixelsY = round($sizeY/$scanGap);
+
+$startX = $homeX - $offsetX;
+$startY = $homeY - $offsetY;
 
 $tmp = imagecreatetruecolor($pixelsX, $pixelsY);      
 imagecopyresampled($tmp, $src, 0, 0, 0, 0, $pixelsX, $pixelsY, $w, $h);
@@ -165,7 +170,7 @@ print("M106 S$laserOff; Turn laser off\n");
 print("G1 F$feedRate\n");
 
 $lineIndex=0;
-print("G0 X$offsetX Y$offsetY F$travelRate\n");
+print("G0 X$startX Y$startY F$travelRate\n");
 for($line=$offsetY; $line<($sizeY+$offsetY); $line+=$scanGap)
    {  
    //analyze the row and find first and last nonwhite pixels
@@ -222,6 +227,6 @@ for($line=$offsetY; $line<($sizeY+$offsetY); $line+=$scanGap)
 $lineIndex--;
 
 print("M106 S$laserOff ;Turn laser off\n");
-print("G0 X$offsetX Y$offsetY F$travelRate ;Go home\n");
+print("G0 X$startX Y$startY F$travelRate ;Go home\n");
 imagedestroy($tmp);
 ?>
