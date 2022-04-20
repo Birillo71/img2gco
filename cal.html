@@ -23,23 +23,25 @@
 
     <body>
         <form method="post" action="cal.php" enctype="multipart/form-data">
-            Laser Min Power [0-255]: <input type="text" value="22" name="LaserMin" size="8"/><br />
-            Laser Max Power [0-255]: <input type="text" value="65" name="LaserMax" size="8"/><br />
-            Laser 'Off' Power [0-255]: <input type="text" value="13" name="LaserOff" size="8"/><br />
-            Skip over values above [0-255]: <input type="text" value="253" name="whiteLevel" size="8"/><br />
+            Laser Min Power [0-255]: <input type="text" value="10" name="LaserMin" size="8"/><br />
+            Laser Max Power [0-255]: <input type="text" value="255" name="LaserMax" size="8"/><br />
+            Laser 'Off' Power [0-255]: <input type="text" value="0" name="LaserOff" size="8"/><br />
+            Skip over values above [0-255]: <input type="text" value="250" name="whiteLevel" size="8"/><br />
             Tune Min <input type="checkbox" name="tuneMin" value="1">
             Tune Max <input type="checkbox" name="tuneMax" value="1"><br />
             
             Travel (noncutting) Rate [mm/min]: <input type="text" value="3000" name="travelRate" size="8"/><br />
-            Scan (cutting) Rate [mm/min]: <input type="text" value="800" name="feedRate" size="8"/><br />
+            Scan (cutting) Rate [mm/min]: <input type="text" value="310" name="feedRate" size="8"/><br />
             
-            Overscan Distance (prevents twang from showing) [mm]: <input value="3" type="text" name="overScan" size="8"/><br />
+            Overscan Distance (prevents twang from showing) [mm]: <input value="0" type="text" name="overScan" size="8"/><br />
             
-            Height (width autocalculated) [mm]: <input type="text" name="sizeY" size="8"/><br />
-            Horizontal Resolution [mm/pixel]: <input value="0.254" type="text" name="resX" size="8"/><br />
-            Scangap [mm/line]: <input type="text" value="0.1" name="scanGap" size="8"/><br />
-            Start X [mm from 0 for right of image]: <input value="25" type="text" name="offsetX" size="8"/><br />
-            Start Y [mm from 0 for top of image]: <input value="25" type="text" name="offsetY" size="8"/><br />
+            Height (width autocalculated) [mm]: <input value="110" type="text" name="sizeY" size="8"/><br />
+            Horizontal Resolution [mm/pixel]: <input value="0.15" type="text" name="resX" size="8"/><br />
+            Scangap [mm/line]: <input type="text" value="0.15" name="scanGap" size="8"/><br />
+            Start X [mm from 0 for right of image]: <input value="0" type="text" name="offsetX" size="8"/><br />
+            Start Y [mm from 0 for top of image]: <input value="55" type="text" name="offsetY" size="8"/><br />
+            Home X [mm]: <input value="220" type="text" name="offsetX" size="8"/><br />
+            Home Y [mm]: <input value="220" type="text" name="offsetY" size="8"/><br />
             Image File: <input type="file" accept="image/*" name="image" id="image" /><br />
             <input type="submit" value='Save' onclick="return validateForm()"/> 
         </form>
